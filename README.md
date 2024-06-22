@@ -1,6 +1,8 @@
-# ZoomNeXt
+# ZoomNeXt: A Unified Collaborative Pyramid Network for Camouflaged Object Detection (TPAMI 2024)
 
-ZoomNeXt: A Unified Collaborative Pyramid Network for Camouflaged Object Detection (preprint)
+<div align="center">
+  <img src="https://github.com/lartpang/ZoomNeXt/assets/26847524/f43f773b-a81f-4c64-a809-9764b53dd52c" alt="Logo">
+</div>
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zoomnext-a-unified-collaborative-pyramid/camouflaged-object-segmentation-on-camo)](https://paperswithcode.com/sota/camouflaged-object-segmentation-on-camo?p=zoomnext-a-unified-collaborative-pyramid) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zoomnext-a-unified-collaborative-pyramid/camouflaged-object-segmentation-on-chameleon)](https://paperswithcode.com/sota/camouflaged-object-segmentation-on-chameleon?p=zoomnext-a-unified-collaborative-pyramid) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zoomnext-a-unified-collaborative-pyramid/camouflaged-object-segmentation-on-cod)](https://paperswithcode.com/sota/camouflaged-object-segmentation-on-cod?p=zoomnext-a-unified-collaborative-pyramid) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zoomnext-a-unified-collaborative-pyramid/camouflaged-object-segmentation-on-nc4k)](https://paperswithcode.com/sota/camouflaged-object-segmentation-on-nc4k?p=zoomnext-a-unified-collaborative-pyramid) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zoomnext-a-unified-collaborative-pyramid/camouflaged-object-segmentation-on-moca-mask)](https://paperswithcode.com/sota/camouflaged-object-segmentation-on-moca-mask?p=zoomnext-a-unified-collaborative-pyramid) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zoomnext-a-unified-collaborative-pyramid/camouflaged-object-segmentation-on)](https://paperswithcode.com/sota/camouflaged-object-segmentation-on?p=zoomnext-a-unified-collaborative-pyramid)
 
