@@ -345,6 +345,7 @@ def parse_cfg():
     )
     parser.add_argument("--evaluate", action="store_true")
     parser.add_argument("--save-results", action="store_true")
+    parser.add_argument("--use-checkpoint", action="store_true")
     parser.add_argument("--info", type=str)
     args = parser.parse_args()
 
@@ -382,7 +383,7 @@ def main():
     model_class = model_zoo.__dict__.get(cfg.model_name)
     assert model_class is not None, "Please check your --model-name"
     model_code = inspect.getsource(model_class)
-    model = model_class(num_frames=1, pretrained=cfg.pretrained)
+    model = model_class(num_frames=1, pretrained=cfg.pretrained, use_checkpoint=cfg.use_checkpoint)
     LOGGER.info(model_code)
     model.to(cfg.device)
 

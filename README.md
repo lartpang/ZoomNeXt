@@ -177,3 +177,7 @@ python main_for_image.py --config configs/icod_train.py --pretrained --model-nam
 
 1. Pretrain on COD10K-TR: `python main_for_image.py --config configs/icod_pretrain.py --info pretrain --model-name PvtV2B5_ZoomNeXt --pretrained`
 2. Finetune on MoCA-Mask-TR: `python main_for_video.py --config configs/vcod_finetune.py --info finetune --model-name videoPvtV2B5_ZoomNeXt --load-from <PRETAINED_WEIGHT>`
+
+> [!note]
+> If you meets the OOM problem, you can try to reduce the batch size or switch on the `--use-checkpoint` flag:
+> `python main_for_image.py/main_for_video.py <your config> --use-checkpoint`

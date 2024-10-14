@@ -86,7 +86,9 @@ class _ZoomNeXt_Base(nn.Module):
 
 
 class RN50_ZoomNeXt(_ZoomNeXt_Base):
-    def __init__(self, pretrained=True, num_frames=1, input_norm=True, mid_dim=64, siu_groups=4, hmu_groups=6):
+    def __init__(
+        self, pretrained=True, num_frames=1, input_norm=True, mid_dim=64, siu_groups=4, hmu_groups=6, **kwargs
+    ):
         super().__init__()
         self.encoder = timm.create_model(
             model_name="resnet50", features_only=True, out_indices=range(5), pretrained=False
@@ -297,7 +299,7 @@ class videoPvtV2B5_ZoomNeXt(PvtV2B5_ZoomNeXt):
 
 
 class EffB1_ZoomNeXt(_ZoomNeXt_Base):
-    def __init__(self, pretrained, num_frames=1, input_norm=True, mid_dim=64, siu_groups=4, hmu_groups=6):
+    def __init__(self, pretrained, num_frames=1, input_norm=True, mid_dim=64, siu_groups=4, hmu_groups=6, **kwargs):
         super().__init__()
         self.set_backbone(pretrained)
 
