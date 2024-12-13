@@ -100,6 +100,8 @@ class VideoTestDataset(data.Dataset):
                     times, last = divmod(num_frames, len(clip_info))
                     clip_info.extend(clip_info * (times - 1))
                     clip_info.extend(clip_info[:last])
+                if self.total_data_paths and clip_info == self.total_data_paths[-1]:
+                    break
                 self.total_data_paths.append(clip_info)
 
                 i += num_frames - overlap
