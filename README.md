@@ -19,33 +19,29 @@
 
 ## Weights and Results
 
-### Results
+See [Google Drive](https://drive.google.com/drive/folders/1Hp3GIqossOrJYs3bRzJICujMKbZy4WxO?usp=drive_link).
 
-| Datasets                            | Links                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CAMO-TE, CHAMELEON, COD10K-TE, NC4K | [ResNet-50](https://github.com/lartpang/ZoomNeXt/releases/download/prediction-v0.1/zoomnext_res50.7z), [EfficientNet-B4](https://github.com/lartpang/ZoomNeXt/releases/download/prediction-v0.1/zoomnext_efficientb4.7z), [PVTv2-B2](https://github.com/lartpang/ZoomNeXt/releases/download/prediction-v0.1/zoomnext_pvtv2b2.7z), [PVTv2-B3](https://github.com/lartpang/ZoomNeXt/releases/download/prediction-v0.1/zoomnext_pvtv2b3.7z), [PVTv2-B4](https://github.com/lartpang/ZoomNeXt/releases/download/prediction-v0.1/zoomnext_pvtv2b4.7z), [PVTv2-B5](https://github.com/lartpang/ZoomNeXt/releases/download/prediction-v0.1/zoomnext_pvtv2b5.7z) |
-| CAD, MoCA-Mask-TE                   | [PVTv2-B5](https://github.com/lartpang/ZoomNeXt/releases/download/prediction-v0.1/zoomnext_pvtv2b5_video.7z)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+### Performance
 
-### Weights
+| Backbone        | CAMO-TE |                      |       | CHAMELEON |                      |       | COD10K-TE |                      |       | NC4K  |                      |       |
+| --------------- | ------- | -------------------- | ----- | --------- | -------------------- | ----- | --------- | -------------------- | ----- | ----- | -------------------- | ----- |
+|                 | $S_m$   | $F^{\omega}_{\beta}$ | MAE   | $S_m$     | $F^{\omega}_{\beta}$ | MAE   | $S_m$     | $F^{\omega}_{\beta}$ | MAE   | $S_m$ | $F^{\omega}_{\beta}$ | MAE   |
+| ResNet-50       | 0.833   | 0.774                | 0.065 | 0.908     | 0.858                | 0.021 | 0.861     | 0.768                | 0.026 | 0.874 | 0.816                | 0.037 |
+| EfficientNet-B1 | 0.848   | 0.803                | 0.056 | 0.916     | 0.870                | 0.020 | 0.863     | 0.773                | 0.024 | 0.876 | 0.823                | 0.036 |
+| EfficientNet-B4 | 0.867   | 0.824                | 0.046 | 0.911     | 0.865                | 0.020 | 0.875     | 0.797                | 0.021 | 0.884 | 0.837                | 0.032 |
+| PVTv2-B2        | 0.874   | 0.839                | 0.047 | 0.922     | 0.884                | 0.017 | 0.887     | 0.818                | 0.019 | 0.892 | 0.852                | 0.030 |
+| PVTv2-B3        | 0.885   | 0.854                | 0.042 | 0.927     | 0.898                | 0.017 | 0.895     | 0.829                | 0.018 | 0.900 | 0.861                | 0.028 |
+| PVTv2-B4        | 0.888   | 0.859                | 0.040 | 0.925     | 0.897                | 0.016 | 0.898     | 0.838                | 0.017 | 0.900 | 0.865                | 0.028 |
+| PVTv2-B5        | 0.889   | 0.857                | 0.041 | 0.924     | 0.885                | 0.018 | 0.898     | 0.827                | 0.018 | 0.903 | 0.863                | 0.028 |
 
-| Backbone        | CAMO-TE |                      |       | CHAMELEON |                      |       | COD10K-TE |                      |       | NC4K  |                      |       | Links                                                                                               |
-| --------------- | ------- | -------------------- | ----- | --------- | -------------------- | ----- | --------- | -------------------- | ----- | ----- | -------------------- | ----- | --------------------------------------------------------------------------------------------------- |
-|                 | $S_m$   | $F^{\omega}_{\beta}$ | MAE   | $S_m$     | $F^{\omega}_{\beta}$ | MAE   | $S_m$     | $F^{\omega}_{\beta}$ | MAE   | $S_m$ | $F^{\omega}_{\beta}$ | MAE   |                                                                                                     |
-| ResNet-50       | 0.833   | 0.774                | 0.065 | 0.908     | 0.858                | 0.021 | 0.861     | 0.768                | 0.026 | 0.874 | 0.816                | 0.037 | [Weight](https://github.com/lartpang/ZoomNeXt/releases/download/weights-v0.2/resnet50-zoomnext.pth) |
-| EfficientNet-B1 | 0.848   | 0.803                | 0.056 | 0.916     | 0.870                | 0.020 | 0.863     | 0.773                | 0.024 | 0.876 | 0.823                | 0.036 | [Weight](https://github.com/lartpang/ZoomNeXt/releases/download/weights-v0.2/eff-b1-zoomnext.pth)   |
-| EfficientNet-B4 | 0.867   | 0.824                | 0.046 | 0.911     | 0.865                | 0.020 | 0.875     | 0.797                | 0.021 | 0.884 | 0.837                | 0.032 | [Weight](https://github.com/lartpang/ZoomNeXt/releases/download/weights-v0.2/eff-b4-zoomnext.pth)   |
-| PVTv2-B2        | 0.874   | 0.839                | 0.047 | 0.922     | 0.884                | 0.017 | 0.887     | 0.818                | 0.019 | 0.892 | 0.852                | 0.030 | [Weight](https://github.com/lartpang/ZoomNeXt/releases/download/weights-v0.2/pvtv2-b2-zoomnext.pth) |
-| PVTv2-B3        | 0.885   | 0.854                | 0.042 | 0.927     | 0.898                | 0.017 | 0.895     | 0.829                | 0.018 | 0.900 | 0.861                | 0.028 | [Weight](https://github.com/lartpang/ZoomNeXt/releases/download/weights-v0.2/pvtv2-b3-zoomnext.pth) |
-| PVTv2-B4        | 0.888   | 0.859                | 0.040 | 0.925     | 0.897                | 0.016 | 0.898     | 0.838                | 0.017 | 0.900 | 0.865                | 0.028 | [Weight](https://github.com/lartpang/ZoomNeXt/releases/download/weights-v0.2/pvtv2-b4-zoomnext.pth) |
-| PVTv2-B5        | 0.889   | 0.857                | 0.041 | 0.924     | 0.885                | 0.018 | 0.898     | 0.827                | 0.018 | 0.903 | 0.863                | 0.028 | [Weight](https://github.com/lartpang/ZoomNeXt/releases/download/weights-v0.2/pvtv2-b5-zoomnext.pth) |
-
-| Backbone       | CAD   |                      |       |       |       | MoCA-Mask-TE |                      |       |       |       | Links                                                                                                      |
-| -------------- | ----- | -------------------- | ----- | ----- | ----- | ------------ | -------------------- | ----- | ----- | ----- | ---------------------------------------------------------------------------------------------------------- |
-|                | $S_m$ | $F^{\omega}_{\beta}$ | MAE   | mDice | mIoU  | $S_m$        | $F^{\omega}_{\beta}$ | MAE   | mDice | mIoU  |                                                                                                            |
-| PVTv2-B5 (T=5) | 0.757 | 0.593                | 0.020 | 0.599 | 0.510 | 0.734        | 0.476                | 0.010 | 0.497 | 0.422 | [Weight](https://github.com/lartpang/ZoomNeXt/releases/download/weights-v0.2/pvtv2-b5-5frame-zoomnext.pth) |
-
+| Backbone       | CAD   |                      |       |       |       | MoCA-Mask-TE |                      |       |       |       |
+| -------------- | ----- | -------------------- | ----- | ----- | ----- | ------------ | -------------------- | ----- | ----- | ----- |
+|                | $S_m$ | $F^{\omega}_{\beta}$ | MAE   | mDice | mIoU  | $S_m$        | $F^{\omega}_{\beta}$ | MAE   | mDice | mIoU  |
+| PVTv2-B5 (T=5) | 0.757 | 0.593                | 0.020 | 0.599 | 0.510 | 0.734        | 0.476                | 0.010 | 0.497 | 0.422 |
 
 ## Prepare Data
+
+> Based on the following data setup, the performance of the VCOD dataset evaluated directly using the training script is now consistent with the paper.
 
 Set all dataset information to the `dataset.yaml` as follows.
 
@@ -61,18 +57,24 @@ moca_mask_tr:
     root: "YOUR-VCOD-DATASETS-ROOT/MoCA-Mask/MoCA_Video/TrainDataset_per_sq",
     image: { path: "*/Imgs", suffix: ".jpg" },
     mask: { path: "*/GT", suffix: ".png" },
+    start_idx: 0,
+    end_idx: 0
   }
 moca_mask_te:
   {
     root: "YOUR-VCOD-DATASETS-ROOT/MoCA-Mask/MoCA_Video/TestDataset_per_sq",
     image: { path: "*/Imgs", suffix: ".jpg" },
     mask: { path: "*/GT", suffix: ".png" },
+    start_idx: 0,
+    end_idx: -2
   }
 cad:
   {
     root: "YOUR-VCOD-DATASETS-ROOT/CamouflagedAnimalDataset",
     image: { path: "original_data/*/frames", suffix: ".png" },
     mask: { path: "converted_mask/*/groundtruth", suffix: ".png" },
+    start_idx: 0,
+    end_idx: 0
   }
 
 # ICOD Datasets
@@ -113,13 +115,14 @@ nc4k:
     mask: { path: "GT", suffix: ".png" },
   }
 ```
+
 </details>
 
 ## Install Requirements
 
-- torch==2.1.2
-- torchvision==0.16.2
-- Others: `pip install -r requirements.txt`
+* torch==2.1.2
+* torchvision==0.16.2
+* Others: `pip install -r requirements.txt`
 
 ## Evaluation
 
@@ -128,35 +131,6 @@ nc4k:
 python main_for_image.py --config configs/icod_train.py --model-name <MODEL_NAME> --evaluate --load-from <TRAINED_WEIGHT>
 # VCOD
 python main_for_video.py --config configs/vcod_finetune.py --model-name <MODEL_NAME> --evaluate --load-from <TRAINED_WEIGHT>
-```
-
-> [!note]
->
-> Evaluating performance on the VCOD dataset directly using training scripts is not consistent with the paper.
-> This is because the evaluation approach in the paper continues the strategy of previous work [SLT-Net](https://github.com/XuelianCheng/SLT-Net), which adjusts the range of valid frames in the sequence.
-
-To get the results in our paper, you can use [PySODEvalToolkit](https://github.com/lartpang/PySODEvalToolkit) and use the similar command as:
-
-```shell
-python ./eval.py `
-    --dataset-json vcod-datasets.json `
-    --method-json vcod-methods.json `
-    --include-datasets CAD `
-    --include-methods videoPvtV2B5_ZoomNeXt `
-    --data-type video `
-    --valid-frame-start "0" `
-    --valid-frame-end "0" `
-    --metric-names "sm" "wfm" "mae" "fmeasure" "em" "dice" "iou"
-
-python ./eval.py `
-    --dataset-json vcod-datasets.json `
-    --method-json vcod-methods.json `
-    --include-datasets MOCA-MASK-TE `
-    --include-methods videoPvtV2B5_ZoomNeXt `
-    --data-type video `
-    --valid-frame-start "0" `
-    --valid-frame-end "-2" `
-    --metric-names "sm" "wfm" "mae" "fmeasure" "em" "dice" "iou"
 ```
 
 ## Training

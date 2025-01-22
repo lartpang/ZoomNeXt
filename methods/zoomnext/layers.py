@@ -51,7 +51,7 @@ class DifferenceAwareOps(nn.Module):
             nn.ReLU(True),
             nn.Conv2d(num_frames, num_frames, 3, 1, 1, bias=False),
         )
-        for t in self.parameters():
+        for t in self.temperal_proj[-1].parameters():
             nn.init.zeros_(t)
 
     def forward(self, x):

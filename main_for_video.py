@@ -51,7 +51,7 @@ def construct_video_transform():
 
 
 def get_number_from_tail(string):
-    return int(re.findall(pattern="\d+$", string=string)[0])
+    return int(re.findall(pattern=r"\d+$", string=string)[0])
 
 
 class VideoTestDataset(data.Dataset):
@@ -66,10 +66,16 @@ class VideoTestDataset(data.Dataset):
         mask_path = os.path.join(dataset_info["root"], dataset_info["mask"]["path"])
         mask_suffix = dataset_info["mask"]["suffix"]
 
+        start_idx = dataset_info.get("start_idx", 0)
+        end_idx = dataset_info.get("end_idx")
+        if end_idx == 0:
+            end_idx = None
+
         image_group_paths = sorted(glob.glob(image_path))
         mask_group_paths = sorted(glob.glob(mask_path))
         group_name_place = image_path.find("*")
 
+        self.frame_repetitions = {}
         self.total_data_paths = []
         for image_group_path, mask_group_path in zip(image_group_paths, mask_group_paths):
             group_name = image_group_path[group_name_place:].split("/")[0]
@@ -84,18 +90,22 @@ class VideoTestDataset(data.Dataset):
             )
             assert len(valid_names) >= num_frames, image_group_path
 
-            i = 0
-            while i < len(valid_names):
-                if i + num_frames > len(valid_names):
-                    i = len(valid_names) - num_frames
-                clip_info = [
-                    (
-                        os.path.join(image_group_path, n) + image_suffix,
-                        os.path.join(mask_group_path, n) + mask_suffix,
-                        group_name,
+            self.frame_repetitions[group_name] = {i: 0 for i in valid_names}
+            clip_start_idx = 0
+            while clip_start_idx < len(valid_names):
+                if clip_start_idx + num_frames > len(valid_names):
+                    clip_start_idx = len(valid_names) - num_frames
+                clip_info = []
+                for n in valid_names[clip_start_idx : clip_start_idx + num_frames]:
+                    if n in valid_names[start_idx:end_idx]:
+                        self.frame_repetitions[group_name][n] += 1
+                    clip_info.append(
+                        (
+                            os.path.join(image_group_path, n) + image_suffix,
+                            os.path.join(mask_group_path, n) + mask_suffix,
+                            group_name,
+                        )
                     )
-                    for n in valid_names[i : i + num_frames]
-                ]
                 if len(clip_info) < num_frames:
                     times, last = divmod(num_frames, len(clip_info))
                     clip_info.extend(clip_info * (times - 1))
@@ -104,7 +114,7 @@ class VideoTestDataset(data.Dataset):
                     break
                 self.total_data_paths.append(clip_info)
 
-                i += num_frames - overlap
+                clip_start_idx += num_frames - overlap
 
     def __getitem__(self, index):
         clip_info = self.total_data_paths[index]
@@ -194,7 +204,7 @@ class VideoTrainDataset(data.Dataset):
             self.total_data_paths.extend(data_paths)
 
         self.frame_specific_transformation = construct_frame_transform()
-        self.frame_share_transformation = construct_video_transform()
+        self.frame_shared_transformation = construct_video_transform()
 
     def __getitem__(self, index):
         base_h = self.shape["h"]
@@ -211,16 +221,15 @@ class VideoTrainDataset(data.Dataset):
                 image = ops.resize(image, height=h, width=w)
 
             if idx_in_group == 0:
-                shared_transformed = self.frame_share_transformation(image=image, mask=mask)
+                _basic_shared_trans = self.frame_shared_transformation(image=image, mask=mask)
+                shared_trans = _basic_shared_trans
             else:
-                shared_transformed = A.ReplayCompose.replay(
-                    saved_augmentations=shared_transformed["replay"], image=image, mask=mask
+                shared_trans = A.ReplayCompose.replay(
+                    saved_augmentations=_basic_shared_trans["replay"], image=image, mask=mask
                 )
-            specific_transformed = self.frame_specific_transformation(
-                image=shared_transformed["image"], mask=shared_transformed["mask"]
-            )
-            image = specific_transformed["image"]
-            mask = specific_transformed["mask"]
+            specific_trans = self.frame_specific_transformation(image=shared_trans["image"], mask=shared_trans["mask"])
+            image = specific_trans["image"]
+            mask = specific_trans["mask"]
 
             images = ops.ms_resize(image, scales=(0.5, 1.0, 1.5), base_h=base_h, base_w=base_w)
             mask = ops.resize(mask, height=base_h, width=base_w)
@@ -255,6 +264,7 @@ class Evaluator:
         all_metrics = recorder.GroupedMetricRecorder(metric_names=self.metric_names)
 
         num_frames = data_loader.dataset.num_frames
+        frame_repetitions = data_loader.dataset.frame_repetitions
         for batch in tqdm(data_loader, total=len(data_loader), ncols=79, desc="[EVAL]"):
             batch_images = pt_utils.to_device(batch["data"], device=self.device)
             batch_images = {k: v.flatten(0, 1) for k, v in batch_images.items()}  # B_T,C,H,W
@@ -286,8 +296,12 @@ class Evaluator:
                             save_dir=os.path.join(save_path, group_name),
                         )
 
-                    pred = (pred * 255).astype(np.uint8)
-                    all_metrics.step(group_name=group_name, pre=pred, gt=mask_array, gt_path=mask_path)
+                    frame_stem = os.path.splitext(os.path.basename(mask_path))[0]
+                    frame_repetitions[group_name][frame_stem] -= 1
+                    if frame_repetitions[group_name][frame_stem] == 0:
+                        # only evaluate the latest frame prediction
+                        pred = (pred * 255).astype(np.uint8)
+                        all_metrics.step(group_name=group_name, pre=pred, gt=mask_array, gt_path=mask_path)
         seg_results, group_seg_results = all_metrics.show(return_group=True)
         return seg_results, group_seg_results
 

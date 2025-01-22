@@ -95,7 +95,7 @@ class RN50_ZoomNeXt(_ZoomNeXt_Base):
         )
         if pretrained:
             params = torch.hub.load_state_dict_from_url(
-                url="https://github.com/lartpang/ZoomNeXt/releases/download/weights-v0.1/resnet50-timm.pth",
+                url="https://github.com/lartpang/Archieve/releases/download/pretrained-model/resnet50-timm.pth",
                 map_location="cpu",
             )
             self.encoder.load_state_dict(params, strict=False)
