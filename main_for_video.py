@@ -526,7 +526,7 @@ def main():
     model.to(cfg.device)
 
     if cfg.load_from:
-        io.load_weight(model=model, load_path=cfg.load_from, strict=True)
+        io.load_weight(model=model, load_path=cfg.load_from, strict=True, skip_unmatched_shape=True)
 
     LOGGER.info(f"Number of Parameters: {sum((v.numel() for v in model.parameters(recurse=True)))}")
     if not cfg.evaluate:

@@ -24,7 +24,7 @@ def load_weight(load_path, model, *, strict=True, skip_unmatched_shape=False):
     for k, v in torch.load(load_path, map_location="cpu").items():
         if k.endswith("module."):
             k = k[7:]
-        if skip_unmatched_shape and v.shape != model_params[k].shape:
+        if skip_unmatched_shape and k in model_params and v.shape != model_params[k].shape:
             continue
         model_params[k] = v
     model.load_state_dict(model_params, strict=strict)
